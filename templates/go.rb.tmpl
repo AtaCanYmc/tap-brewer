@@ -1,0 +1,17 @@
+class {{CLASS_NAME}} < Formula
+  desc "{{DESC}}"
+  homepage "{{HOMEPAGE}}"
+  url "{{TARBALL_URL}}"
+  sha256 "{{SHA256}}"
+  license "{{LICENSE}}"
+
+  depends_on "go" => :build
+
+  def install
+    system "go", "build", *std_go_args(ldflags: "-s -w"), "{{BUILD_PATH}}"
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/{{BIN_NAME}} --version")
+  end
+end

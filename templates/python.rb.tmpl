@@ -1,0 +1,22 @@
+class {{CLASS_NAME}} < Formula
+  include Language::Python::Virtualenv
+
+  desc "{{DESC}}"
+  homepage "{{HOMEPAGE}}"
+  url "{{TARBALL_URL}}"
+  sha256 "{{SHA256}}"
+  license "{{LICENSE}}"
+
+  depends_on "{{PYTHON_DEP}}"
+
+  # For PyPI dependencies, generate `resource` blocks with `poet {{FORMULA_NAME}}`
+  # and paste them above `def install`.
+
+  def install
+    virtualenv_install_with_resources
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/{{BIN_NAME}} --version")
+  end
+end
