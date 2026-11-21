@@ -1,5 +1,8 @@
 # tap-brewer
 
+[![CI](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml/badge.svg)](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 An open-source AI agent skill that publishes the project in your current working directory to a personal Homebrew tap repository (`homebrew-*`), updates the tap `README.md` table, and validates the generated formula.
 
 ## Table of Contents
@@ -22,8 +25,8 @@ flowchart TD
     C --> D{"GitHub release exists?"}
     D -->|"No (exit 2)"| E["Stop and ask user to create release"]
     D -->|"Yes"| F["Render Formula/<name>.rb from template"]
-    F --> G["Update tap README.md table & run brew style"]
-    G --> H["Show diff & await confirmation"]
+    F --> G["Update tap README.md table & re-document via well-document"]
+    G --> H["Run brew style / audit, show diff & await confirmation"]
     H --> I["Commit (Conventional Commits) & push or open PR"]
 ```
 
@@ -37,6 +40,7 @@ flowchart TD
 | `shasum` or `sha256sum` | Yes | Computing deterministic SHA256 checksums |
 | `python3` (3.9+) | Yes | Running `scripts/refactor_tap_readme.py` with stdlib only |
 | `brew` | Optional | Running local `brew style` and `brew audit` checks |
+| `well-document` skill | Optional | Re-documenting and polishing the tap repository after formula updates |
 
 Authenticate `gh` before using the skill:
 
@@ -115,25 +119,53 @@ python3 ./scripts/refactor_tap_readme.py \
 
 ```text
 tap-brewer/
-├── SKILL.md                        # Agent skill definition and 5-step workflow
-├── README.md                       # Setup, usage, and architecture documentation
-├── LICENSE                         # MIT license
-├── .gitignore                      # Git ignore rules
+├── .github/
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.yml
+│   │   ├── config.yaml
+│   │   └── feature_request.yml
+│   ├── PULL_REQUEST_TEMPLATE/
+│   │   └── pull_request_template.md
+│   └── workflows/
+│       ├── ci.yml
+│       ├── owner-auto-merge.yml
+│       └── release-please.yml
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── .markdownlint.json
+├── .release-please-manifest.json
+├── CONTRIBUTING.md
+├── LICENSE
+├── Makefile
+├── README.md
+├── ROADMAP.md
+├── SECURITY.md
+├── SKILL.md
+├── release-please-config.json
 ├── scripts/
-│   ├── fetch_release_info.sh       # Deterministic release tag and SHA256 fetcher
-│   └── refactor_tap_readme.py      # Zero-dependency tap README.md table updater
+│   ├── fetch_release_info.sh
+│   └── refactor_tap_readme.py
 ├── templates/
-│   ├── go.rb.tmpl                  # Go formula template
-│   ├── node.rb.tmpl                # Node.js formula template
-│   ├── python.rb.tmpl              # Python virtualenv formula template
-│   └── shell.rb.tmpl               # Standalone shell script formula template
+│   ├── go.rb.tmpl
+│   ├── node.rb.tmpl
+│   ├── python.rb.tmpl
+│   └── shell.rb.tmpl
 └── tests/
-    └── test_tap_brewer.py          # Stdlib unittest suite for scripts and templates
+    └── test_tap_brewer.py
 ```
 
 ## Local Verification
 
-Run the test suite with Python 3:
+Run the full lint and test suite with Make:
+
+```bash
+make check
+```
+
+Or run the unit tests directly with Python 3:
 
 ```bash
 python3 -m unittest discover -s tests -v

@@ -86,10 +86,10 @@ Execute these five steps in order. Resolve helper script and template paths rela
    - Ensure `test do` runs a real command supported by the binary (for example, `--version`, `version`, or `--help`) and asserts expected output.
    - When updating an existing formula, preserve custom `resource` blocks, caveats, or patches unless they are obsolete.
 
-### 4. Tap Repository Refactoring and Validation
+### 4. Tap Repository Refactoring, Re-Documentation, and Validation
 
 1. Derive the Homebrew tap shorthand `<user>/<tap>` by stripping the `homebrew-` prefix from the tap repo name (for example, `alice/homebrew-tap` becomes `alice/tap`).
-2. Update the tap's `README.md` table:
+2. Update the tap's `README.md` formula table deterministically:
    ```bash
    python3 <skill-dir>/scripts/refactor_tap_readme.py \
      --readme /tmp/tap-brewer-work/<tap-repo-name>/README.md \
@@ -98,7 +98,11 @@ Execute these five steps in order. Resolve helper script and template paths rela
      --tap <user>/<tap> \
      --source https://github.com/<owner>/<repo>
    ```
-3. If `brew` is installed locally, validate the formula and fix any reported offenses:
+3. Re-document the tap repository with the `well-document` skill after the formula and table are updated:
+   - If the `well-document` skill is installed in the agent environment, load it and run `well-document polish README.md` (and `well-document audit`) against `/tmp/tap-brewer-work/<tap-repo-name>` so directory trees, formula counts, install examples, and cross-links stay grounded and pass the 6-gate anti-slop scorecard.
+   - Only update existing tap documentation files; do not scaffold unrequested governance files into the tap repo without explicit user confirmation.
+   - If `well-document` is not installed, keep the `refactor_tap_readme.py` output and manually verify that the tap `README.md` has no stale formula lists, broken relative links, or em-dashes.
+4. If `brew` is installed locally, validate the formula and fix any reported offenses:
    ```bash
    brew style /tmp/tap-brewer-work/<tap-repo-name>/Formula/<name>.rb
    ```
@@ -109,11 +113,11 @@ Execute these five steps in order. Resolve helper script and template paths rela
 1. Present a clear review summary to the user:
    - `git -C /tmp/tap-brewer-work/<tap-repo-name> diff --stat` (and `git status --short` if `Formula/<name>.rb` is untracked)
    - Full contents of `Formula/<name>.rb`
-   - `git -C /tmp/tap-brewer-work/<tap-repo-name> diff README.md`
+   - `git -C /tmp/tap-brewer-work/<tap-repo-name> diff README.md` (plus any other updated tap documentation files)
 2. Ask the user to confirm:
    - Whether the changes look right to commit.
    - Whether to push directly to `main` or open a pull request with `gh pr create`.
-3. After explicit confirmation, stage `Formula/<name>.rb` and `README.md` and commit using Conventional Commits:
+3. After explicit confirmation, stage `Formula/<name>.rb`, `README.md`, and any other updated tap documentation files, then commit using Conventional Commits:
    - New formula: `feat(formula): add <name> <version>`
    - Updated formula: `chore(formula): bump <name> to <version>`
 4. Push according to the user's choice:
