@@ -1,0 +1,34 @@
+{
+  "name": "tap-brewer",
+  "owner": {
+    "name": "AtaCanYmc",
+    "url": "https://github.com/AtaCanYmc"
+  },
+  "metadata": {
+    "description": "Homebrew tap publishing and formula automation plugin",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "tap-brewer",
+      "source": "./",
+      "description": "Publish the current project to a personal Homebrew tap (homebrew-*), update the tap README, and validate the formula.",
+      "version": "0.1.0",
+      "author": {
+        "name": "AtaCanYmc",
+        "url": "https://github.com/AtaCanYmc"
+      },
+      "homepage": "https://github.com/AtaCanYmc/tap-brewer",
+      "repository": "https://github.com/AtaCanYmc/tap-brewer",
+      "license": "MIT",
+      "keywords": [
+        "homebrew",
+        "tap",
+        "formula",
+        "release",
+        "cli"
+      ],
+      "category": "deployment"
+    }
+  ]
+}

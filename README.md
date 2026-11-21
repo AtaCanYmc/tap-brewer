@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="tap-brewer logo" width="144" />
+</p>
+
 # tap-brewer
 
 [![CI](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml/badge.svg)](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml)
@@ -50,31 +54,51 @@ gh auth login
 
 ## Installation
 
-Clone this repository into your agent's global skills directory.
+Install `tap-brewer` with `npx skills`, as a native plugin, or by cloning into your agent's global skills directory.
 
-### Google Antigravity / Gemini CLI
-
-```bash
-git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.gemini/config/skills/tap-brewer
-```
-
-### Claude Code
+### Skills CLI (`npx skills`)
 
 ```bash
-git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.claude/skills/tap-brewer
+npx skills add AtaCanYmc/tap-brewer
 ```
 
-### Codex
+Install globally across agents:
 
 ```bash
-git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.codex/skills/tap-brewer
+npx skills add AtaCanYmc/tap-brewer -g
 ```
 
-### Cursor
+### Claude Code Plugin
 
 ```bash
-git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.cursor/skills/tap-brewer
+claude plugin marketplace add AtaCanYmc/tap-brewer
+claude plugin install tap-brewer@tap-brewer
 ```
+
+Invoke the bundled slash command inside any project directory with `/tap-brewer:tap-brew`.
+
+### Google Antigravity Plugin
+
+```bash
+git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.gemini/config/plugins/tap-brewer
+```
+
+### Gemini CLI Extension
+
+```bash
+gemini extensions install https://github.com/AtaCanYmc/tap-brewer
+```
+
+### Standalone Skill Directories
+
+| Agent | Install Command |
+| --- | --- |
+| Antigravity / Gemini CLI | `git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.gemini/config/skills/tap-brewer` |
+| Claude Code | `git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.claude/skills/tap-brewer` |
+| Codex | `git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.codex/skills/tap-brewer` |
+| Cursor | `git clone https://github.com/AtaCanYmc/tap-brewer.git ~/.cursor/skills/tap-brewer` |
+
+From a local clone, you can also run `make install-all` or `make install-plugin-antigravity`.
 
 ## Usage
 
@@ -119,6 +143,13 @@ python3 ./scripts/refactor_tap_readme.py \
 
 ```text
 tap-brewer/
+├── .claude-plugin/
+│   ├── marketplace.json
+│   └── plugin.json
+├── .codex-plugin/
+│   └── plugin.json
+├── .cursor-plugin/
+│   └── plugin.json
 ├── .github/
 │   ├── CODEOWNERS
 │   ├── dependabot.yml
@@ -144,10 +175,21 @@ tap-brewer/
 ├── ROADMAP.md
 ├── SECURITY.md
 ├── SKILL.md
+├── assets/
+│   └── logo.png
+├── commands/
+│   └── tap-brew.md
+├── gemini-extension.json
+├── plugin.json
 ├── release-please-config.json
 ├── scripts/
 │   ├── fetch_release_info.sh
 │   └── refactor_tap_readme.py
+├── skills/
+│   └── tap-brewer/
+│       ├── SKILL.md -> ../../SKILL.md
+│       ├── scripts -> ../../scripts
+│       └── templates -> ../../templates
 ├── templates/
 │   ├── go.rb.tmpl
 │   ├── node.rb.tmpl

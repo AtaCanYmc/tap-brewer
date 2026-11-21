@@ -232,5 +232,39 @@ class TestTemplates(unittest.TestCase):
                 self.assertEqual(style.returncode, 0, f"brew style failed:\n{style.stdout}\n{style.stderr}")
 
 
+class TestPluginManifests(unittest.TestCase):
+    MANIFESTS = [
+        "plugin.json",
+        "gemini-extension.json",
+        ".claude-plugin/plugin.json",
+        ".claude-plugin/marketplace.json",
+        ".cursor-plugin/plugin.json",
+        ".codex-plugin/plugin.json",
+    ]
+
+    def test_manifests_valid_and_versions_match(self) -> None:
+        versions = set()
+        for rel in self.MANIFESTS:
+            path = ROOT / rel
+            self.assertTrue(path.is_file(), f"missing {rel}")
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(data.get("name"), "tap-brewer")
+            if rel == ".claude-plugin/marketplace.json":
+                versions.add(data["metadata"]["version"])
+                versions.add(data["plugins"][0]["version"])
+            else:
+                versions.add(data["version"])
+        self.assertEqual(len(versions), 1, f"version mismatch across manifests: {versions}")
+
+    def test_plugin_skill_symlinks_and_command_exist(self) -> None:
+        for rel in [
+            "skills/tap-brewer/SKILL.md",
+            "skills/tap-brewer/scripts/fetch_release_info.sh",
+            "skills/tap-brewer/templates/python.rb.tmpl",
+            "commands/tap-brew.md",
+        ]:
+            self.assertTrue((ROOT / rel).exists(), f"missing plugin asset: {rel}")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,27 @@
+{
+  "name": "tap-brewer",
+  "displayName": "Tap Brewer",
+  "version": "0.1.0",
+  "description": "Publish the current project to a personal Homebrew tap (homebrew-*), update the tap README, and validate the formula.",
+  "logo": "assets/logo.png",
+  "suggestedPrompts": [
+    "Publish this project to my Homebrew tap using tap-brewer",
+    "Update my Homebrew formula for the latest GitHub release and open a PR",
+    "Generate a brew-audit-compliant formula for this repository"
+  ],
+  "author": {
+    "name": "AtaCanYmc",
+    "url": "https://github.com/AtaCanYmc"
+  },
+  "homepage": "https://github.com/AtaCanYmc/tap-brewer",
+  "repository": "https://github.com/AtaCanYmc/tap-brewer",
+  "license": "MIT",
+  "keywords": [
+    "homebrew",
+    "tap",
+    "formula",
+    "release",
+    "cli",
+    "devops"
+  ]
+}
