@@ -1,7 +1,7 @@
 {
   "name": "tap-brewer",
   "displayName": "Tap Brewer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Publish the current project to a personal Homebrew tap (homebrew-*), update the tap README, and validate the formula.",
   "author": {
     "name": "AtaCanYmc",
