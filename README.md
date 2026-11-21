@@ -5,7 +5,17 @@
 # tap-brewer
 
 [![CI](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml/badge.svg)](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/ci.yml)
+[![Release Please](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/release-please.yml/badge.svg)](https://github.com/AtaCanYmc/tap-brewer/actions/workflows/release-please.yml)
+[![Release](https://img.shields.io/github/v/release/AtaCanYmc/tap-brewer?include_prereleases&sort=semver)](https://github.com/AtaCanYmc/tap-brewer/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/AtaCanYmc/tap-brewer?style=flat)](https://github.com/AtaCanYmc/tap-brewer/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/AtaCanYmc/tap-brewer)](https://github.com/AtaCanYmc/tap-brewer/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/AtaCanYmc/tap-brewer)](https://github.com/AtaCanYmc/tap-brewer/commits/main)
+
+[![Homebrew Formulae](https://img.shields.io/badge/Homebrew-Formulae-FBB040?logo=homebrew&logoColor=black)](templates/)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](scripts/refactor_tap_readme.py)
+[![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?logo=gnubash&logoColor=white)](scripts/fetch_release_info.sh)
+[![Agent Plugins](https://img.shields.io/badge/Plugins-Claude%20%7C%20Antigravity%20%7C%20Gemini%20%7C%20Cursor%20%7C%20Codex-1F2937)](docs/plugins.md)
 
 An open-source AI agent skill that publishes the project in your current working directory to a personal Homebrew tap repository (`homebrew-*`), updates the tap `README.md` table, and validates the generated formula.
 
