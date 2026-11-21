@@ -16,6 +16,7 @@ An open-source AI agent skill that publishes the project in your current working
 - [Installation](#installation)
 - [Usage](#usage)
 - [Supported Ecosystems](#supported-ecosystems)
+- [Documentation](#documentation)
 - [Repository Layout](#repository-layout)
 - [Local Verification](#local-verification)
 - [License](#license)
@@ -139,6 +140,15 @@ python3 ./scripts/refactor_tap_readme.py \
 | Shell | Standalone script | Direct `bin.install` mapping | [`templates/shell.rb.tmpl`](templates/shell.rb.tmpl) |
 | Rust | `Cargo.toml` | `cargo install` with `std_cargo_args` | Inline in [`SKILL.md`](SKILL.md) |
 
+## Documentation
+
+Detailed guides live in [`docs/`](docs/README.md):
+
+- [Publishing Workflow](docs/workflow.md)
+- [Helper Scripts Reference](docs/scripts.md)
+- [Formula Templates](docs/templates.md)
+- [Multi-Agent Plugin Packaging](docs/plugins.md)
+
 ## Repository Layout
 
 ```text
@@ -179,6 +189,12 @@ tap-brewer/
 │   └── logo.png
 ├── commands/
 │   └── tap-brew.md
+├── docs/
+│   ├── README.md
+│   ├── plugins.md
+│   ├── scripts.md
+│   ├── templates.md
+│   └── workflow.md
 ├── gemini-extension.json
 ├── plugin.json
 ├── release-please-config.json
